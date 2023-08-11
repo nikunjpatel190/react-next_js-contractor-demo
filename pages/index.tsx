@@ -8,7 +8,7 @@ import Table, { AvatarCell, SpecialitiesCell } from '../components/Table';
 import SearchModel from '../components/Home/SearchModel';
 
 const getData = async (checkedRow: string[], resHandle: any) => {
-  let dataRs = [];
+  // let dataRs = [];
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -29,7 +29,7 @@ const getData = async (checkedRow: string[], resHandle: any) => {
     dataRs = await reData.json();
   } */
 
-  dataRs = {
+  let dataRs = {
     data:{contractors:[
     {
       "id": "1",
