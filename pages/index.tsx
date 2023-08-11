@@ -97,7 +97,7 @@ const getData = async (checkedRow: string[], resHandle: any) => {
 
 function Home() {
 
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState<string[]>([]);
   const [filterModel, setFilterModel] = React.useState(false);
   const [checkedRow, setCheckedRow] = React.useState<string[]>([]);
 
@@ -115,20 +115,7 @@ function Home() {
 
   const columns = React.useMemo(() => {
     return [
-      {
-        Header: '',
-        accessor: 'check',
-        Cell: (RowData: any) => {
-
-          return (
-            <input type="checkbox" onChange={(e) => {
-              handleChecked(e.target.checked, RowData.row.id)
-            }} checked={checkedRow.includes(RowData.row.id) || RowData.row.checked} name='check' className="appearance-none checked:bg-blue-500" />
-          )
-
-        },
-        disableSortBy: true
-      },
+      
       {
         Header: "Name",
         accessor: 'name',
@@ -156,8 +143,12 @@ function Home() {
 
   useEffect(() => {
     // console.log(data, checkedRow, "data")
+    // handleCheckedRow(data);
   }, [checkedRow, data]);
 
+  const handleCheckedRow = (rows:any[]) => {
+    setData(rows);
+  }
 
   const handleFilterModel = () => {
     setFilterModel(!filterModel);
@@ -175,7 +166,7 @@ function Home() {
           </div>
           <div className="">
             {
-              data && data.length > 0 && (<Table columns={columns} handleChecked={handleChecked} checkedRow={checkedRow} handleFilterModel={handleFilterModel} setCheckedRow={setCheckedRow} data={data} />)
+              data && data.length > 0 && (<Table columns={columns} handleChecked={handleChecked} checkedRow={checkedRow} handleCheckedRow={handleCheckedRow} handleFilterModel={handleFilterModel} setCheckedRow={setCheckedRow} data={data} />)
             }
 
           </div>

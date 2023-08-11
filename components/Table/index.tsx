@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy, usePagination } from 'react-table';
+import { useTable, useFilters, useRowSelect, useGlobalFilter, useAsyncDebounce, useSortBy, usePagination } from 'react-table';
 // import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
 import { Button, PageButton } from './shared/Button'
 import { classNames } from './shared/Utils'
@@ -82,7 +82,7 @@ export function SpecialitiesCell({ value }:any) {
         key={index+'-int'}
         className={
           classNames(
-            "px-3 py-2 uppercase leading-wide text-xs ms-1 rounded-md bg-slate-200 pills-text"
+            "pills-text"
           )
         }
       >
@@ -109,6 +109,7 @@ export function AvatarCell({ value, column, row }:any) {
 
 
 function Table(props: any) {
+  const [checkedRow, setCheckedRow] = useState(props.checkedRow);
   const {
     getTableProps,
     getTableBodyProps,
@@ -135,7 +136,31 @@ function Table(props: any) {
     useGlobalFilter,
     useSortBy,
     usePagination,  // new
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => [
+        {
+          id: 'selection',
+          Header: ({ getToggleAllRowsSelectedProps }:any) => (
+            <div>
+              <input type="checkbox" {...getToggleAllRowsSelectedProps()} />
+            </div>
+          ),
+          Cell: ({ row }:any) => (
+            <div>
+              <input type="checkbox" {...row.getToggleRowSelectedProps()} />
+            </div>
+          ),
+          disableSortBy: true
+        },
+        ...columns,
+      ]);
+    }
   );
+
+  useEffect(()=>{
+    console.log(state, "props.checkedRow")
+  },[props.checkedRow])
   
   return (
     <>
@@ -165,7 +190,9 @@ function Table(props: any) {
               <table {...getTableProps()} className="min-w-full rounded-sm">
                 <thead className="bg-white">
                   {headerGroups.map((headerGroup:any) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <tr {...headerGroup.getHeaderGroupProps()}
+                      
+                    >
                       {headerGroup.headers.map((column:any) => (
                         <th
                           scope="col"
@@ -176,13 +203,13 @@ function Table(props: any) {
                             {
                               column.Header ? column.render('Header') : (
                                 <input type="checkbox" onChange={(e)=>{
-                                  if(e.target.checked){
+                                  /* if(e.target.checked){
                                     props.setCheckedRow(page.map((row:any)=>row.id))
                                   }else{
                                     props.setCheckedRow([])
-                                  }
+                                  } */
                                   
-                                }} className="appearance-none checked:bg-blue-500" />
+                                }} {...column.getHeaderProps()} className="appearance-none checked:bg-blue-500" />
                               )
                             }
                             
@@ -210,19 +237,21 @@ function Table(props: any) {
                 >
                   {page.map((row:any, i:any) => {  // new
                     prepareRow(row);
-                    
+                    console.log(props.checkedRow, row.id)
                     return (
-                      <tr {...row.getRowProps()} onClick={(e)=>{
+                      <tr {...row.getRowProps()} /* onClick={(e)=>{
                         if(!props.checkedRow.includes(row.id)){
                           props.checkedRow.push(row.id);
-                          props.setCheckedRow(props.checkedRow)
+                          props.setCheckedRow(props.checkedRow);
+                          setCheckedRow(props.checkedRow);
                         }else{
                           let lid = props.checkedRow.filter((lid:any) => lid != row.id);
                           props.setCheckedRow(lid);
+                          setCheckedRow(lid);
                         }
                         
-                      }}
-                      className={`${props.checkedRow.includes(row.id) ? 'selected' : ''}`}
+                      }} */
+                      className={`${props.checkedRow.includes(row.id) || checkedRow.includes(row.id) || row.isSelected ? 'selected' : ''}`}
                       >
                         {row.cells.map((cell:any) => {
                           return (
