@@ -1,8 +1,12 @@
+import { ApolloServer, gql } from 'apollo-server-micro';
+import { MicroRequest } from 'apollo-server-micro/dist/types';
+import { ServerResponse, IncomingMessage } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { graphql, buildSchema } from 'graphql';
+// import { buildSchema } from 'type-graphql';
 
-const data = {
-    contractors: [
+const intData = {
+  contractors: [
+    
       {
         id:1,
         name: 'Strykes',
@@ -43,32 +47,39 @@ const data = {
         day_rate: "$ 100,00",
         color:'#893E3E'
       },
-    ],
+    
+  ]
 }
 
-const typeDefs = `
-type Contractor {
-  id: ID!
-  name: String!
-  specialities: [String!]
-  availability: String!
-  day_rate: String!
-  color: String!
-}
+const typeDefs = gql`
+  type Contractor {
+    id: ID!
+    name: String!
+    specialities: [String!]
+    availability: String!
+    day_rate: String!
+    color: String!
+  }
 
-type Query {
-  contractors: [Contractor]
-}
-`
+  type Query {
+    contractors: [Contractor]
+  }
+`;
 
-const schema = buildSchema(typeDefs);
-
-const root = {
-  hello: () => 'Hello, Next.js GraphQL API!'
+const resolvers = {
+  Query: {
+    contractors: (obj: any, args: any, context: { contractors: any; }) => intData.contractors,
+  },
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { query } = req.body;
-  const result = await graphql(schema, query, root);
-  res.status(200).json(result);
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+const startServer = server.start();
+
+export default async function handler(req: MicroRequest, res: ServerResponse<IncomingMessage>) {
+  await startServer;
+  await server.createHandler({ path: "/api/graphql" })(req, res);
 }
