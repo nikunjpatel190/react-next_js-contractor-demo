@@ -5,7 +5,7 @@ import Table, { AvatarCell, SpecialitiesCell } from '../components/Table';
 import SearchModel from '../components/Home/SearchModel';
 
 
-const getData = async (checkedRow: string[], resHandle: any) => {
+const getData = async ( resHandle: any) => {
   // let dataRs = [];
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -27,8 +27,8 @@ const getData = async (checkedRow: string[], resHandle: any) => {
     dataRs = await reData.json();
   } */
 
-  let dataRs = {
-    data:{contractors:[
+  let dataRs = [
+    
     {
       "id": "1",
       "name": "Strykes",
@@ -84,14 +84,10 @@ const getData = async (checkedRow: string[], resHandle: any) => {
       "day_rate": "$ 100,00",
       "color": "#893E3E"
     }
-  ]}};
+  ];
 
 
-  resHandle(dataRs?.data?.contractors?.map((it: any, index: number) => {
-    if (checkedRow.includes(String(index))) it.checked = true;
-    else it.checked = false;
-    return it;
-  }))
+  resHandle(dataRs);
 
 }
 
@@ -101,17 +97,6 @@ function Home() {
   const [filterModel, setFilterModel] = React.useState(false);
   const [checkedRow, setCheckedRow] = React.useState<string[]>([]);
 
-  const handleChecked = (checked: boolean, RowID: any) => {
-    if (checked) {
-      let checkedRowCh: any = checkedRow;
-      if (!checkedRowCh.includes(RowID))
-        checkedRowCh.push(RowID);
-      setCheckedRow(checkedRowCh);
-    } else {
-      let checkedRowCh = checkedRow.filter((rv: any) => rv !== RowID);
-      setCheckedRow(checkedRowCh);
-    }
-  }
 
   const columns = React.useMemo(() => {
     return [
@@ -135,20 +120,12 @@ function Home() {
         accessor: 'availability'
       },
     ]
-  }, [checkedRow])
+  }, [])
 
   useEffect(() => {
-    getData(checkedRow, (resDt: any) => setData(resDt))
+    getData((resDt: any) => setData(resDt))
   }, []);
 
-  useEffect(() => {
-    // console.log(data, checkedRow, "data")
-    // handleCheckedRow(data);
-  }, [checkedRow, data]);
-
-  const handleCheckedRow = (rows:any[]) => {
-    setData(rows);
-  }
 
   const handleFilterModel = () => {
     setFilterModel(!filterModel);
@@ -166,7 +143,7 @@ function Home() {
           </div>
           <div className="">
             {
-              data && data.length > 0 && (<Table columns={columns} handleChecked={handleChecked} checkedRow={checkedRow} handleCheckedRow={handleCheckedRow} handleFilterModel={handleFilterModel} setCheckedRow={setCheckedRow} data={data} />)
+              data && data.length > 0 && (<Table columns={columns}  checkedRow={checkedRow} handleFilterModel={handleFilterModel} setCheckedRow={setCheckedRow} data={data} />)
             }
 
           </div>
