@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+
+.theme-text{
+  color:#1B1B18;
+  font-weight: 400;
+}
+.thead-text{
+  color: #868683;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+.pills-text{
+  color:#5E5E5E;
+}
+.brand-wrapper{
+  margin-right: 40px;
+}
+.nav-menu-icon{height: 25px;}
+.line-h-none{line-height: 0;}
+.header-search-input{border-radius: 8px; background: #F9F9F8;}
+.copy-k-cut{width: 100%; padding: 6px 4px; margin-right: 5px; background: #FFF; border-radius: 5px;}
+.page-title{color: #1B1B18;font-size: 40px; font-style: normal; font-weight: 600; line-height: 48px; letter-spacing: -1px;}
+.page-description{font-size: 14px; font-style: normal; font-weight: 400; line-height: 20px;color: rgba(51, 51, 51, 0.60);}
+
+table tbody tr:hover{
+  background: #FAFAFA;
+}
+
+table tbody tr.selected{
+  background: #377FE9;
+  color: white;
+}
+
+table tbody tr.selected td div{
+  color:#FFF !important
+}
+
+.filter-btn{color:#706F6C;padding:12px 24px;background: #F8F8F8; border-radius: 8px}
+.model-search{
+  font-size: 20px;font-weight: 400;padding: 24px; line-height: normal; outline: none;
+  color: #999;
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.model-search:focus{outline: none !important; box-shadow:none !important}
+.model-small-title{color: #868683;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 160% */
+  padding: 0px 24px;
+  text-transform: uppercase;
+}
+
+.model-data-body{
+  padding: 0px 8px;
+  color: #555;
+}
+
+.data-label{
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  width: 100%;
+}
+
+.data-label:hover{
+  border-radius: 8px;
+  background: #F6F6F6;
+  cursor: pointer;
+}
