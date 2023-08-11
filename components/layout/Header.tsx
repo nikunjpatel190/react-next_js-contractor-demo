@@ -1,17 +1,14 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon,  XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
-/* import Logo from 'public/assets/images/logo.png';
-import Tapped from 'public/assets/images/tapped.svg';
-import ChevronSelector from 'public/assets/images/chevron-selector-vertical.svg';
-import Search from 'public/assets/images/search-sm.svg';
-import Stroke from 'public/assets/images/Stroke.svg';
-import K from 'public/assets/images/K.svg';
-import BellIcon from 'public/assets/images/Bell.svg';
-import QuestionMark from 'public/assets/images/Question-Mark-Circled.svg'
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';  */
 import Image from 'next/image';
+import { QuestionIcon } from '../Icons/QuestionIcon';
+import { BellIcon } from '../Icons/BellIcon';
+import { TappedIcon } from '../Icons/TappedIcon';
+import { TappedFirst } from '../Icons/TappedFirst';
+import { StrokeIcon } from '../Icons/StrokeIcon';
+import { KIcon } from '../Icons/KIcon';
 
 const user = {
   name: 'Tom Cook',
@@ -30,23 +27,23 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Header(props:any) {
+export default function Header(props: any) {
   const [menuRoutes, setNavigation] = useState([
-    { name: 'Overview', href: '/', current: false},
+    { name: 'Overview', href: '/', current: false },
     { name: 'Tasks', href: '/about', current: false },
-    { name: 'Projects',  current: false },
-    { name: 'Payments',  current: false },
-    { name: 'Users',  current: false },
+    { name: 'Projects', current: false },
+    { name: 'Payments', current: false },
+    { name: 'Users', current: false },
   ]);
 
-  useEffect(()=>{
-    console.log(1)
-  },[menuRoutes])
+  useEffect(() => {
+    // console.log(1)
+  }, [menuRoutes])
 
-  const updateNavigate = (href:String)=> {
-    
-    let newMenus:any = menuRoutes.map((m)=>{
-      if(m.href === href) m.current = true;
+  const updateNavigate = (href: String) => {
+
+    let newMenus: any = menuRoutes.map((m) => {
+      if (m.href === href) m.current = true;
       else m.current = false;
       return m;
     });
@@ -64,32 +61,26 @@ export default function Header(props:any) {
                 <div className="flex items-center">
                   <div className="brand-wrapper">
                     <Image
-                      width={32}
-                      height={32}
-                      className="h-8 w-8"
+                      width={24}
+                      height={24}
+
                       src={`/assets/images/logo.png`}
                       alt="Your Company"
                     />
                   </div>
 
                   <div className="me-1">
-                    <Image
-                      width={24}
-                      height={24}
-                      className="h-8 w-8"
-                      src={`/assets/images/tapped.svg`}
-                      alt="Your Company"
-                    />
-                    
+                    <TappedFirst />
+
                   </div>
 
                   <div className="">
                     <div className="">
-                      Teqqed <Image 
-                                alt="Your Company" className='inline' src={`/assets/images/chevron-selector-vertical.svg`} 
-                                width={12}
-                                height={12}
-                              />
+                      Teqqed <Image
+                        alt="Your Company" className='inline' src={`/assets/images/chevron-selector-vertical.svg`}
+                        width={12}
+                        height={12}
+                      />
                     </div>
                   </div>
 
@@ -107,48 +98,48 @@ export default function Header(props:any) {
                       <div className="relative rounded-md ">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                           <Image width={20}
-                      height={20} alt="Your Company" src={`/assets/images/search-sm.svg`} />
+                            height={20} alt="Your Company" src={`/assets/images/search-sm.svg`} />
                         </div>
                         <input
                           type="text"
                           name="price"
                           id="price"
-                          className="header-search-input block w-full rounded-md border-0 py-1.5 pl-9 pr-10 text-gray-900 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="header-search-input block w-full rounded-md border-0 py-1.5 pl-9 pr-12 text-gray-900 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           placeholder="Search..."
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center">
-                          <button className='line-h-none copy-k-cut'>
-                            <Image width={12}
-                      height={12} alt="Your Company" className='inline me-1' src={`/assets/images/Stroke.svg`} />
-                            <Image width={10}
-                      height={10} alt="Your Company" className='inline ' src={`/assets/images/K.svg`} />
+                          <button className='line-h-none copy-k-cut flex me-2'>
+                            <StrokeIcon />
+                            <KIcon />
                           </button>
                         </div>
                       </div>
                     </div>
-                    
-                    
+
+
                     <button
                       type="button"
                       className="me-3"
                     >
-                      <Image 
+                      {/* <Image 
                         width={24}
                         height={24}
                         alt="Your Company"  
                         className='nav-menu-icon' 
                         src={`/assets/images/Question-Mark-Circled.svg`} 
 
-                      />
+                      /> */}
+                      <QuestionIcon />
                     </button>
                     <button
                       type="button"
                       className=""
                     >
-                      <Image 
+                      {/* <Image 
                       width={24}
                       height={24}
-                      alt="Your Company" className='nav-menu-icon' src={`/assets/images/Bell.svg`} />
+                      alt="Your Company" className='nav-menu-icon' src={`/assets/images/Bell.svg`} /> */}
+                      <BellIcon />
                     </button>
 
                     {/* Profile dropdown */}
@@ -157,8 +148,7 @@ export default function Header(props:any) {
                         <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
-                          <Image width={32}
-                      height={32} alt="Your Company" className="h-8 w-8 rounded-full" src={`/assets/images/tapped.svg`} />
+                          <TappedIcon />
                         </Menu.Button>
                       </div>
                       <Transition
@@ -211,9 +201,9 @@ export default function Header(props:any) {
                 <div className="ml-10 flex items-baseline space-x-4">
                   {menuRoutes.map((item) => (
                     <Link
-                      key={item.name+'-main'}
+                      key={item.name + '-main'}
                       href={item.href ? item.href : '/'}
-                      onClick={()=>updateNavigate(item.href ? item.href : '')}
+                      onClick={() => updateNavigate(item.href ? item.href : '')}
                       className={classNames(
                         item.current
                           ? 'border-b border-black'
@@ -233,7 +223,7 @@ export default function Header(props:any) {
               <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                 {menuRoutes.map((item) => (
                   <Disclosure.Button
-                    key={item.name+'-child'}
+                    key={item.name + '-child'}
                     as="a"
                     href={item.href}
                     className={classNames(

@@ -1,11 +1,9 @@
 
 import Layout from '../components/layout';
-
-
-
 import React, { useEffect } from 'react';
 import Table, { AvatarCell, SpecialitiesCell } from '../components/Table';
 import SearchModel from '../components/Home/SearchModel';
+
 
 const getData = async (checkedRow: string[], resHandle: any) => {
   // let dataRs = [];
@@ -157,7 +155,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(data, checkedRow, "data")
+    // console.log(data, checkedRow, "data")
   }, [checkedRow, data]);
 
 

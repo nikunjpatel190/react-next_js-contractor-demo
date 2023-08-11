@@ -4,6 +4,8 @@ import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy, use
 import { Button, PageButton } from './shared/Button'
 import { classNames } from './shared/Utils'
 import { SortIcon, SortUpIcon, SortDownIcon } from './shared/Icons';
+import { SearchIcon } from '@/components/Icons/SearchIcon';
+import { FilterIcon } from '@/components/Icons/FilterIcon';
 import Image from 'next/image';
 // import Search from '/assets/images/search-sm.svg';
 // import Setting from '/assets/images/sliders-02.svg';
@@ -23,7 +25,8 @@ function GlobalFilter({
       <div className='px-4 gap-x-2 items-baseline mb-4 mt-4 w-full'>
         <div className="relative rounded-md ">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <Image alt="-" width={10} height={10} src={`/assets/images/search-sm.svg`} />
+            {/* <Image alt="-" width={10} height={10} src={`/assets/images/search-sm.svg`} /> */}
+            <SearchIcon />
           </div>
           <input
             type="text"
@@ -47,8 +50,9 @@ function GlobalFilter({
               onClick={()=>handleFilterModel()}
               className='filter-btn'
               >
-              <span className='me-2'>Filters</span>
-              <Image alt="-" width={10} height={10} className='inline me-1' src={`/assets/images/sliders-02.svg`} />
+              <span className='me-2 filter-text'>Filters</span>
+              {/* <Image alt="-" width={10} height={10} className='inline me-1' src={`/assets/images/sliders-02.svg`} /> */}
+              <FilterIcon className='inline' />
               
             </button>
           </div>

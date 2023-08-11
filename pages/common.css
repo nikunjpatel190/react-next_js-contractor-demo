@@ -4,10 +4,13 @@
 @tailwind variants;
 
 
-.theme-text{
-  color:#1B1B18;
-  font-weight: 400;
-}
+.theme-text{ color:#1B1B18; font-weight: 400;}
+.filter-text{color: #706F6C;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;}
 .thead-text{
   color: #868683;
   font-size: 12px;
@@ -22,8 +25,13 @@
 }
 .nav-menu-icon{height: 25px;}
 .line-h-none{line-height: 0;}
-.header-search-input{border-radius: 8px; background: #F9F9F8;}
-.copy-k-cut{width: 100%; padding: 6px 4px; margin-right: 5px; background: #FFF; border-radius: 5px;}
+.header-search-input{border-radius: 8px; background: #F9F9F8;padding-right: 50px;
+}
+.copy-k-cut{padding: 8px;
+  align-items: center;
+  gap: 6px; border-radius: 6px;
+  border: 1px solid #F1F1F1;
+  background: #FFF;}
 .page-title{color: #1B1B18;font-size: 40px; font-style: normal; font-weight: 600; line-height: 48px; letter-spacing: -1px;}
 .page-description{font-size: 14px; font-style: normal; font-weight: 400; line-height: 20px;color: rgba(51, 51, 51, 0.60);}
 
